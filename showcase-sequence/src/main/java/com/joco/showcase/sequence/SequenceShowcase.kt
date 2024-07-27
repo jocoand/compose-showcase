@@ -51,7 +51,7 @@ class SequenceShowcaseScope(
     private val state: SequenceShowcaseState,
 ) {
     /**
-     *  Creates a Modifier that marks a Composable as a target for the SequenceShowcase.
+     * Creates a Modifier that marks a Composable as a target for the SequenceShowcase.
      */
     fun Modifier.sequenceShowcaseTarget(
         index: Int,

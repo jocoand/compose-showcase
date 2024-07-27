@@ -19,8 +19,7 @@ fun rememberSequenceShowcaseState(): SequenceShowcaseState {
 }
 
 /**
- * Class represents the state of a sequence showcase.
- * It manages the targets of the showcase and the current target index.
+ * Manages the targets of the showcase and the current target index.
  * It also controls the visibility of the showcase.
  */
 class SequenceShowcaseState {
