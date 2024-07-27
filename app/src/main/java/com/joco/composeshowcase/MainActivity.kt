@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.joco.compose_showcaseview.ShowcaseAlignment
+import com.joco.compose_showcaseview.ShowcasePosition
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
 import com.joco.showcase.sequence.SequenceShowcase
 import com.joco.showcase.sequence.rememberSequenceShowcaseState
@@ -75,12 +76,11 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Greeting(
                                     modifier = Modifier
-                                        .align(Alignment.End)
                                         .sequenceShowcaseTarget(
                                             index = 0,
                                             content = {
                                                 MyShowcaseDialog(
-                                                    text = "Hey, this is Greetings showcase",
+                                                    text = "Hello Andy, Welcome abroad! ",
                                                     onClick = { sequenceShowcaseState.next() }
                                                 )
                                             }
@@ -96,7 +96,7 @@ class MainActivity : ComponentActivity() {
                                             index = 1,
                                             content = {
                                                 MyShowcaseDialog(
-                                                    text = "Hey, this is Article show case",
+                                                    text = "You can read cool articles here!",
                                                     onClick = { sequenceShowcaseState.next() }
                                                 )
                                             }
@@ -109,6 +109,7 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .sequenceShowcaseTarget(
                                                 index = 2,
+                                                position = ShowcasePosition.Top,
                                                 alignment = ShowcaseAlignment.CenterHorizontal,
                                                 content = {
                                                     MyShowcaseDialog(
