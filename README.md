@@ -2,29 +2,25 @@
     
   # Compose Showcase
 
-  <img src="https://img.shields.io/badge/mavenCentral-1.1.0-blue.svg" alt="version">
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
   <img src="https://img.shields.io/badge/platform-android-brightgreen.svg" alt="platform">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
   
   <p>
     
-  A Jetpack Compose library for showcasing your feature.
+  A library for showcasing your feature in Jetpack Compose.
   
   </p>
   
 </div>
 
-## Sequence Showcase 🍁
-Creating a sequence of showcases in a specific order.
+## 🍁 Sequence Showcase
 <p>
-   <img src="https://github.com/user-attachments/assets/c2fc64f8-3467-46c5-a638-eb439b264e70" width="300" alt="preview">
-</p>
+<img src="https://img.shields.io/badge/mavenCentral-1.0.0-blue.svg" alt="version">
 
-### Installation
-- Gradle
-  ```
-  implementation("io.github.jocoand:showcase-sequence:1.0.0")
-  ```
+Creating a sequence of showcases in a specific order.
+
+<img src="https://github.com/user-attachments/assets/c2fc64f8-3467-46c5-a638-eb439b264e70" width="250" alt="preview">
+</p>
 
 ### Usage
 - Create your Showcase dialog
@@ -58,11 +54,11 @@ Creating a sequence of showcases in a specific order.
         ...
   ```
 
-- Mark your target component with `sequenceShowcaseTarget` modifier
+- Mark your target view with `sequenceShowcaseTarget` modifier
 
 - ```
-    // Component to be highlighted
-    Greeting(
+    // View to be highlighted
+    MyView1(
       modifier = Modifier
           .sequenceShowcaseTarget(
               index = 0,
@@ -72,7 +68,6 @@ Creating a sequence of showcases in a specific order.
                   )
               }
           ),
-      name = "Andy",
       onClick = { sequenceShowcaseState.start() }
     )
   ```
@@ -91,7 +86,7 @@ Creating a sequence of showcases in a specific order.
 
 - Use `SequenceShowcaseState.next()` to navigate to the next showcase
 - ```
-    Article(
+    MyView2(
         modifier = Modifier
             .sequenceShowcaseTarget(
                 index = 1,
@@ -111,7 +106,7 @@ Creating a sequence of showcases in a specific order.
 
 - See [sample](https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt) for more more details
 
-### Config
+### Config 🛠️ 
 - You can adjust the dialog `position` and `alignment` from the `sequenceShowcaseTarget` modifier
 - ```
     .sequenceShowcaseTarget(
@@ -123,9 +118,23 @@ Creating a sequence of showcases in a specific order.
   ```
   See the [preview](https://github.com/jocoand/compose-showcaseview?tab=readme-ov-file#config)
 
-### 💡 Inspired by
+### Installation
+- Gradle
+  ```
+  implementation("io.github.jocoand:showcase-sequence:1.0.0")
+  ```
+
+### Inspired by 💡 
 - https://github.com/canopas/compose-intro-showcase
 
-### 🎨 Sample
-- See https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt
+### Sample 🎨 
+- See [MainActivity](https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt)
 
+## 🌀 ShowcaseView 
+<img src="https://img.shields.io/badge/mavenCentral-1.1.0-blue.svg" alt="version">
+
+In case you need more basic usage, you can you use [ShowcaseView](https://github.com/jocoand/compose-showcaseview/tree/main)
+
+### Contributing
+Contribution are welcome! 
+Feel free to open an issue or a pull request, if you find any bugs or have any suggestions.
