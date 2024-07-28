@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.joco.compose_showcaseview.ShowcaseAlignment
 import com.joco.compose_showcaseview.ShowcaseDisplayState
+import com.joco.compose_showcaseview.ShowcaseDuration
 import com.joco.compose_showcaseview.ShowcasePosition
 import com.joco.compose_showcaseview.ShowcaseView
 
@@ -27,6 +28,7 @@ fun SequenceShowcase(
                 targetCoordinates = target.coordinates,
                 position = target.position,
                 alignment = target.alignment,
+                duration = target.duration,
                 onDisplayStateChanged = { displayState ->
                     when(displayState) {
                         ShowcaseDisplayState.Appeared -> {
@@ -57,6 +59,7 @@ class SequenceShowcaseScope(
         index: Int,
         position: ShowcasePosition = ShowcasePosition.Default,
         alignment: ShowcaseAlignment = ShowcaseAlignment.Default,
+        duration: ShowcaseDuration = ShowcaseDuration.Default,
         content: @Composable () -> Unit,
     ): Modifier = onGloballyPositioned { coordinates ->
         state.targets[index] = SequenceShowcaseTarget(
@@ -64,7 +67,8 @@ class SequenceShowcaseScope(
             coordinates = coordinates,
             position = position,
             alignment = alignment,
-            content = content
+            content = content,
+            duration = duration
         )
     }
 }
