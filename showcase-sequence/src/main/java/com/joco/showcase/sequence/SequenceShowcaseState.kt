@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.LayoutCoordinates
 import com.joco.compose_showcaseview.ShowcaseAlignment
 import com.joco.compose_showcaseview.ShowcasePosition
+import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
 
 @Composable
 fun rememberSequenceShowcaseState(): SequenceShowcaseState {
@@ -80,5 +81,6 @@ data class SequenceShowcaseTarget(
     val coordinates: LayoutCoordinates,
     val position: ShowcasePosition,
     val alignment: ShowcaseAlignment,
+    val highlight: ShowcaseHighlight,
     val content: @Composable () -> Unit
 )

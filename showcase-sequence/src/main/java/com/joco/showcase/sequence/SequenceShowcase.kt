@@ -10,6 +10,7 @@ import com.joco.compose_showcaseview.ShowcaseAlignment
 import com.joco.compose_showcaseview.ShowcaseDisplayState
 import com.joco.compose_showcaseview.ShowcasePosition
 import com.joco.compose_showcaseview.ShowcaseView
+import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
 
 @Composable
 fun SequenceShowcase(
@@ -27,6 +28,7 @@ fun SequenceShowcase(
                 targetCoordinates = target.coordinates,
                 position = target.position,
                 alignment = target.alignment,
+                highlight = target.highlight,
                 onDisplayStateChanged = { displayState ->
                     when(displayState) {
                         ShowcaseDisplayState.Appeared -> {
@@ -57,6 +59,7 @@ class SequenceShowcaseScope(
         index: Int,
         position: ShowcasePosition = ShowcasePosition.Default,
         alignment: ShowcaseAlignment = ShowcaseAlignment.Default,
+        highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
         content: @Composable () -> Unit,
     ): Modifier = onGloballyPositioned { coordinates ->
         state.targets[index] = SequenceShowcaseTarget(
@@ -64,6 +67,7 @@ class SequenceShowcaseScope(
             coordinates = coordinates,
             position = position,
             alignment = alignment,
+            highlight = highlight,
             content = content
         )
     }
