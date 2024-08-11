@@ -54,6 +54,12 @@ class SequenceShowcaseScope(
 ) {
     /**
      * Creates a Modifier that marks a Composable as a target for the SequenceShowcase.
+     *
+     * @param index The index of the target in the sequence.
+     * @param position The position of the dialog relative to the target element.
+     * @param alignment The alignment of the dialog relative to the target element.
+     * @param highlight The highlight around the target element.
+     * @param content The content of the dialog.
      */
     fun Modifier.sequenceShowcaseTarget(
         index: Int,
