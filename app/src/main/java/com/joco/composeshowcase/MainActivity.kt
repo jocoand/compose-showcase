@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.joco.compose_showcaseview.ShowcaseAlignment
 import com.joco.compose_showcaseview.ShowcasePosition
+import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
 import com.joco.showcase.sequence.SequenceShowcase
 import com.joco.showcase.sequence.rememberSequenceShowcaseState
@@ -94,6 +95,7 @@ class MainActivity : ComponentActivity() {
                                         .align(Alignment.Start)
                                         .sequenceShowcaseTarget(
                                             index = 1,
+                                            highlight = ShowcaseHighlight.Rectangular(24.dp),
                                             content = {
                                                 MyShowcaseDialog(
                                                     text = "You can read cool articles here!",
@@ -110,6 +112,7 @@ class MainActivity : ComponentActivity() {
                                             .sequenceShowcaseTarget(
                                                 index = 2,
                                                 position = ShowcasePosition.Top,
+                                                highlight = ShowcaseHighlight.Circular,
                                                 alignment = ShowcaseAlignment.CenterHorizontal,
                                                 content = {
                                                     MyShowcaseDialog(
@@ -124,6 +127,7 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .sequenceShowcaseTarget(
                                                 index = 3,
+                                                highlight = ShowcaseHighlight.Rectangular(0.dp),
                                                 alignment = ShowcaseAlignment.CenterHorizontal,
                                                 content = {
                                                     MyShowcaseDialog(
