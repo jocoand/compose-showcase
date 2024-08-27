@@ -16,17 +16,18 @@
 
 ## 🍁 Sequence Showcase
 <p>
-<img src="https://img.shields.io/badge/mavenCentral-1.0.0-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.1.1-blue.svg" alt="version">
 
 Creating a sequence of showcases in a specific order.
 
-<img src="https://github.com/user-attachments/assets/c2fc64f8-3467-46c5-a638-eb439b264e70" width="275" alt="preview">
+<img src="https://github.com/user-attachments/assets/110a3047-9a60-4386-a111-5586682f1f7f" width="275" alt="preview">
+
 </p>
 
 ### Installation
 - Gradle
   ```
-  implementation("io.github.jocoand:showcase-sequence:1.0.0")
+  implementation("io.github.jocoand:showcase-sequence:1.1.1")
   ```
 
 ### Usage
@@ -155,6 +156,22 @@ Creating a sequence of showcases in a specific order.
 
   `Default`: relative to target position
 
+- `highlight`
+  <table>
+      <tr>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/0487988f-b14b-452e-9ad3-d3441821fe39" width="120">
+      </td>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/f14bad26-a7de-4fea-9bec-6b9d653a0821" width="120">
+      </td>
+    </tr>
+    <tr>
+      <td align="center">Rectangular</td>
+      <td align="center">Circular</td>
+    </tr>
+  </table>
+
 ### Inspired by 💡 
 - https://github.com/canopas/compose-intro-showcase
 
@@ -162,7 +179,7 @@ Creating a sequence of showcases in a specific order.
 - See [MainActivity](https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt)
 
 ## 🌀 ShowcaseView 
-<img src="https://img.shields.io/badge/mavenCentral-1.1.0-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.3.0-blue.svg" alt="version">
 
 In case you need more basic usage, you can you use [ShowcaseView](https://github.com/jocoand/compose-showcaseview/tree/main)
 
