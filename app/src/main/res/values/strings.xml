@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Compose Showcase</string>
+
+    <string name="label_greetings">Hello %s!</string>
+
+    <string name="button_awesome">Awesome !</string>
+    <string name="button_nice">Nice !</string>
 </resources>

@@ -3,8 +3,10 @@ package com.joco.composeshowcase
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.joco.compose_showcaseview.ShowcaseAlignment
@@ -36,6 +39,8 @@ import com.joco.compose_showcaseview.ShowcasePosition
 import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
 import com.joco.showcase.sequence.SequenceShowcase
+import com.joco.showcase.sequence.SequenceShowcaseScope
+import com.joco.showcase.sequence.SequenceShowcaseState
 import com.joco.showcase.sequence.rememberSequenceShowcaseState
 
 
@@ -60,159 +65,168 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     ) { innerPadding ->
-                        Surface(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding),
-                            color = MaterialTheme.colorScheme.background
-                        ) {
-                            val loremIpsumText = """
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-"""
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .verticalScroll(columnScrollState)
-                            ) {
-                                Greeting(
-                                    modifier = Modifier
-                                        .sequenceShowcaseTarget(
-                                            index = 0,
-                                            content = {
-                                                MyShowcaseDialog(
-                                                    text = "Hello Andy, Welcome abroad! ",
-                                                    onClick = { sequenceShowcaseState.next() }
-                                                )
-                                            }
-                                        ),
-                                    name = "Andy",
-                                    onClick = { sequenceShowcaseState.start() }
-                                )
-                                Spacer(modifier = Modifier.height(30.dp))
-                                Article(
-                                    modifier = Modifier
-                                        .align(Alignment.Start)
-                                        .sequenceShowcaseTarget(
-                                            index = 1,
-                                            highlight = ShowcaseHighlight.Rectangular(24.dp),
-                                            content = {
-                                                MyShowcaseDialog(
-                                                    text = "You can read cool articles here!",
-                                                    onClick = { sequenceShowcaseState.next() }
-                                                )
-                                            }
-                                        ),
-                                    subheading = "Today's Article",
-                                    paragraph = loremIpsumText
-                                )
-                                Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                                    LikeButton(
-                                        modifier = Modifier
-                                            .sequenceShowcaseTarget(
-                                                index = 2,
-                                                position = ShowcasePosition.Top,
-                                                highlight = ShowcaseHighlight.Circular,
-                                                alignment = ShowcaseAlignment.CenterHorizontal,
-                                                content = {
-                                                    MyShowcaseDialog(
-                                                        text = "Click here if you love the article!",
-                                                        onClick = { sequenceShowcaseState.next() }
-                                                    )
-                                                }
-                                            )
-                                    )
-                                    Spacer(modifier = Modifier.width(16.dp))
-                                    ShareButton(
-                                        modifier = Modifier
-                                            .sequenceShowcaseTarget(
-                                                index = 3,
-                                                highlight = ShowcaseHighlight.Rectangular(0.dp),
-                                                alignment = ShowcaseAlignment.CenterHorizontal,
-                                                content = {
-                                                    MyShowcaseDialog(
-                                                        text = "You also can share the article!",
-                                                        onClick = { sequenceShowcaseState.next() }
-                                                    )
-                                                }
-                                            )
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Article(
-                                    modifier = Modifier
-                                        .align(Alignment.Start),
-                                    subheading = "Today's Article 2",
-                                    paragraph = loremIpsumText
-                                )
-                            }
-                        }
+                        MainContent(innerPadding, columnScrollState, sequenceShowcaseState)
                     }
                 }
             }
         }
     }
+}
 
-    @Composable
-    fun Greeting(modifier: Modifier = Modifier, name: String, onClick: () -> Unit) {
+@Composable
+fun SequenceShowcaseScope.MainContent(
+    innerPadding: PaddingValues,
+    columnScrollState: ScrollState,
+    sequenceShowcaseState: SequenceShowcaseState
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        val loremIpsumText = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    """
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .verticalScroll(columnScrollState)
+        ) {
+            Greeting(
+                modifier = Modifier
+                    .sequenceShowcaseTarget(
+                        index = 0,
+                        content = {
+                            MyShowcaseDialog(
+                                text = "Hello Andy, Welcome abroad! ",
+                                onClick = { sequenceShowcaseState.next() }
+                            )
+                        }
+                    ),
+                name = "Andy",
+                onClick = { sequenceShowcaseState.start() }
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            Article(
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .sequenceShowcaseTarget(
+                        index = 1,
+                        highlight = ShowcaseHighlight.Rectangular(24.dp),
+                        content = {
+                            MyShowcaseDialog(
+                                text = "You can read cool articles here!",
+                                onClick = { sequenceShowcaseState.next() }
+                            )
+                        }
+                    ),
+                subheading = "Today's Article",
+                paragraph = loremIpsumText
+            )
+            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                LikeButton(
+                    modifier = Modifier
+                        .sequenceShowcaseTarget(
+                            index = 2,
+                            position = ShowcasePosition.Top,
+                            highlight = ShowcaseHighlight.Circular(targetMargin = 12.dp),
+                            alignment = ShowcaseAlignment.CenterHorizontal,
+                            content = {
+                                MyShowcaseDialog(
+                                    text = "Click here if you love the article!",
+                                    onClick = { sequenceShowcaseState.next() }
+                                )
+                            }
+                        )
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ShareButton(
+                    modifier = Modifier
+                        .sequenceShowcaseTarget(
+                            index = 3,
+                            highlight = ShowcaseHighlight.Rectangular(0.dp),
+                            alignment = ShowcaseAlignment.CenterHorizontal,
+                            content = {
+                                MyShowcaseDialog2(
+                                    text = "You also can share the article!",
+                                    onClick = { sequenceShowcaseState.next() }
+                                )
+                            }
+                        )
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Article(
+                modifier = Modifier
+                    .align(Alignment.Start),
+                subheading = "Today's Article 2",
+                paragraph = loremIpsumText
+            )
+        }
+    }
+}
+
+@Composable
+fun Greeting(modifier: Modifier = Modifier, name: String, onClick: () -> Unit) {
+    Text(
+        text = stringResource(id = R.string.label_greetings, name),
+        modifier = modifier.clickable { onClick() },
+    )
+}
+
+@Composable
+fun Article(
+    modifier: Modifier = Modifier,
+    subheading: String,
+    paragraph: String
+) {
+    Column(modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
         Text(
-            text = "Hello, $name!",
-            modifier = modifier.clickable { onClick() },
+            text = subheading,
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.W500
+        )
+        Text(
+            text = paragraph,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
+}
 
-    @Composable
-    fun Article(
-        modifier: Modifier = Modifier,
-        subheading: String,
-        paragraph: String
-    ) {
-        Column(modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-            Text(
-                text = subheading,
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.W500
-            )
-            Text(
-                text = paragraph,
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
+@Composable
+fun LikeButton(modifier: Modifier = Modifier) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.Favorite,
+            contentDescription = "Like Icon",
+            tint = Color.Gray
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "Love It!",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
     }
+}
 
-    @Composable
-    fun LikeButton(modifier: Modifier = Modifier) {
-        Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Like Icon",
-                tint = Color.Gray
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Love It!",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-
-    @Composable
-    fun ShareButton(modifier: Modifier = Modifier) {
-        Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.Share,
-                contentDescription = "Share Icon",
-                tint = Color.Gray
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Share",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
+@Composable
+fun ShareButton(modifier: Modifier = Modifier) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.Share,
+            contentDescription = "Share Icon",
+            tint = Color.Gray
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "Share",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
     }
 }

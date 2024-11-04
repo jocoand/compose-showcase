@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -30,7 +31,28 @@ fun MyShowcaseDialog(text: String, onClick: () -> Unit) {
             shape = RoundedCornerShape(8.dp),
             onClick = onClick
         ) {
-            Text("Nice !")
+            Text(stringResource(R.string.button_nice))
+        }
+    }
+}
+
+@Composable
+fun MyShowcaseDialog2(text: String, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .background(Color.White, shape = RoundedCornerShape(16.dp))
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.End
+    ) {
+        Text(text = text)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            shape = RoundedCornerShape(24.dp),
+            onClick = onClick
+        ) {
+            Text(stringResource(R.string.button_awesome))
         }
     }
 }
