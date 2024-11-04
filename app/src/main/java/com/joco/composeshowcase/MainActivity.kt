@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
                                             .sequenceShowcaseTarget(
                                                 index = 2,
                                                 position = ShowcasePosition.Top,
-                                                highlight = ShowcaseHighlight.Circular,
+                                                highlight = ShowcaseHighlight.Circular(targetMargin = 12.dp),
                                                 alignment = ShowcaseAlignment.CenterHorizontal,
                                                 content = {
                                                     MyShowcaseDialog(
