@@ -20,7 +20,7 @@
 
 Creating a sequence of showcases in a specific order.
 
-<img src="https://github.com/user-attachments/assets/110a3047-9a60-4386-a111-5586682f1f7f" width="275" alt="preview">
+<img src="https://github.com/user-attachments/assets/729c0e1d-95b3-4c53-bfd5-50ebae52fb56" width="275" alt="preview">
 
 </p>
 
