@@ -4,7 +4,7 @@
 
   <img src="https://img.shields.io/badge/platform-android-brightgreen.svg" alt="platform">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
-  
+
   <p>
     
   A library for showcasing your feature in Jetpack Compose.
@@ -20,7 +20,7 @@
 
 Creating a sequence of showcases in a specific order.
 
-<img src="https://github.com/user-attachments/assets/110a3047-9a60-4386-a111-5586682f1f7f" width="275" alt="preview">
+<img src="https://github.com/user-attachments/assets/c4826028-2699-4a70-ab83-edee811f3884" width="275" alt="preview">
 
 </p>
 
