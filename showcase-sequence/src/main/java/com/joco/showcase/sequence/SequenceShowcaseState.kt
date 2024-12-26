@@ -64,7 +64,7 @@ class SequenceShowcaseState {
 
     internal fun onShowcaseViewAppear() {
         if (isTransitioning) {
-            # Test workflow
+            // Test workflow
             currentTargetIndex++
             isTransitioning = false
         }
