@@ -70,7 +70,6 @@ class SequenceShowcaseState {
 
     internal fun onShowcaseViewDisappear() {
         if (isTransitioning) {
-            currentTargetIndex++
             showCaseVisible = currentTarget != null
         }
     }
