@@ -64,14 +64,14 @@ class SequenceShowcaseState {
 
     internal fun onShowcaseViewAppear() {
         if (isTransitioning) {
-            // Test workflow
-            currentTargetIndex++
             isTransitioning = false
         }
     }
 
     internal fun onShowcaseViewDisappear() {
         if (isTransitioning) {
+            // Test workflow
+            currentTargetIndex++
             showCaseVisible = currentTarget != null
         }
     }
