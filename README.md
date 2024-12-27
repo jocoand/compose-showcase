@@ -4,6 +4,7 @@
 
   <img src="https://img.shields.io/badge/platform-android-brightgreen.svg" alt="platform">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
+  <img src="https://github.com/jocoand/compose-showcase/actions/workflows/verify-screenshot-test.yml/badge.svg?branch=main" alt="status">
 
   <p>
     
