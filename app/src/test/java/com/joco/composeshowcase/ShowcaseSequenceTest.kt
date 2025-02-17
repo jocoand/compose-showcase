@@ -51,22 +51,22 @@ class ShowcaseSequenceTest {
 
         // 1st showcase
         textGreetings.performClick()
-        advanceTime()
+        advanceTime(DEFAULT_MILLIS)
         capture()
 
         // 2nd showcase
         buttonNice.performClick()
-        advanceTime()
+        advanceTime(DEFAULT_MILLIS + MainActivity.SHOWCASE_2_DURATION)
         capture()
 
         // 3rd showcase
         buttonNice.performClick()
-        advanceTime()
+        advanceTime(MainActivity.SHOWCASE_2_DURATION + MainActivity.SHOWCASE_3_DURATION.toLong())
         capture()
 
         // 4th showcase
         buttonNice.performClick()
-        advanceTime()
+        advanceTime(MainActivity.SHOWCASE_3_DURATION.toLong() + DEFAULT_MILLIS)
         capture()
 
         // Close
@@ -75,8 +75,8 @@ class ShowcaseSequenceTest {
         capture()
     }
 
-    private fun advanceTime() {
-        composeRule.mainClock.advanceTimeBy(MILLIS * 2)
+    private fun advanceTime(millis: Long = DEFAULT_MILLIS * 2) {
+        composeRule.mainClock.advanceTimeBy(millis)
     }
 
     private fun capture() {
@@ -90,6 +90,6 @@ class ShowcaseSequenceTest {
     }
 
     companion object {
-        const val MILLIS = 700L
+        const val DEFAULT_MILLIS = 700L
     }
 }
