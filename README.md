@@ -161,10 +161,10 @@ Creating a sequence of showcases in a specific order.
   <table>
       <tr>
       <td align="center">
-        <img src="https://github.com/user-attachments/assets/0487988f-b14b-452e-9ad3-d3441821fe39" width="120">
+        <img src="https://github.com/user-attachments/assets/8ba3932a-1137-42fc-a8dc-64a8868fed03" width="120">
       </td>
       <td align="center">
-        <img src="https://github.com/user-attachments/assets/f14bad26-a7de-4fea-9bec-6b9d653a0821" width="120">
+        <img src="https://github.com/user-attachments/assets/fc91cc26-2fe5-42c8-902e-0ae04a9257b7" width="120">
       </td>
     </tr>
     <tr>
