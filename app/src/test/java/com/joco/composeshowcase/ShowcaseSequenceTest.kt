@@ -1,5 +1,7 @@
 package com.joco.composeshowcase
 
+import android.app.Application
+import android.content.ComponentName
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.rememberScrollState
@@ -8,14 +10,18 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
+import androidx.test.core.app.ApplicationProvider
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import com.github.takahirom.roborazzi.captureRoboImage
 import com.joco.showcase.sequence.SequenceShowcase
 import com.joco.showcase.sequence.rememberSequenceShowcaseState
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -24,7 +30,21 @@ import org.robolectric.annotation.GraphicsMode
 @Config(qualifiers = RobolectricDeviceQualifiers.PixelXL)
 class ShowcaseSequenceTest {
 
-    @get:Rule
+    @get:Rule(order = 1)
+    val addActivityToRobolectricRule = object : TestWatcher() {
+        override fun starting(description: Description?) {
+            super.starting(description)
+            val appContext: Application = ApplicationProvider.getApplicationContext()
+            Shadows.shadowOf(appContext.packageManager).addActivityIfNotPresent(
+                ComponentName(
+                    appContext.packageName,
+                    ComponentActivity::class.java.name,
+                )
+            )
+        }
+    }
+
+    @get:Rule(order = 2)
     val composeRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
