@@ -32,7 +32,7 @@ Creating a sequence of showcases in a specific order.
   ```
 
 ### Usage
-- Create your Showcase dialog
+- #### Create your Showcase dialog
 - ```
     @Composable
     fun MyShowcaseDialog(text: String, onClick: () -> Unit) {
@@ -54,7 +54,7 @@ Creating a sequence of showcases in a specific order.
         }
     }
   ```
-- Declare the `SequenceShowcase` & `sequenceShowcaseState`
+- #### Declare the `SequenceShowcase` & `sequenceShowcaseState`
 - ```
   val sequenceShowcaseState = rememberSequenceShowcaseState()
   
@@ -63,16 +63,16 @@ Creating a sequence of showcases in a specific order.
         ...
   ```
 
-- Mark your target view with `sequenceShowcaseTarget` modifier
+- #### Mark your target view (view to be highlighted) with `sequenceShowcaseTarget` modifier
 
 - ```
-    // View to be highlighted
-    MyView1(
+    
+    MyView1(    // View to be highlighted
       modifier = Modifier
-          .sequenceShowcaseTarget(
+          .sequenceShowcaseTarget(    // Mark with sequenceShowcaseTarget
               index = 0,
               content = {
-                  MyShowcaseDialog(
+                  MyShowcaseDialog(    // Dialog to be displayed
                       text = "Hey, this is Greetings showcase",
                   )
               }
@@ -80,20 +80,20 @@ Creating a sequence of showcases in a specific order.
       onClick = { sequenceShowcaseState.start() }
     )
   ```
-  Assign `index` value to mark the order to be shown in the sequence
+  `index`: the order to be shown in the sequence
   
-  Assign `content` value with your dialog
+  `content`: dialog to be displayed
 
-- Use `SequenceShowcaseState.start()` to start the showcase
+- #### Use `SequenceShowcaseState.start()` to start the showcase
 - ```
     LaunchButton(
         ...
         onClick = { sequenceShowcaseState.start() }
     )
   ```
-  Assign optional `index` value to start at certain index
+  `index`: value to start at certain index (optional)
 
-- Use `SequenceShowcaseState.next()` to navigate to the next showcase
+- #### Use `SequenceShowcaseState.next()` to navigate to the next showcase
 - ```
     MyView2(
         modifier = Modifier
