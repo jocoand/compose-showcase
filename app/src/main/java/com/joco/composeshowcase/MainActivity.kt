@@ -34,8 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.joco.compose_showcaseview.AnimationDuration
 import com.joco.compose_showcaseview.ShowcaseAlignment
-import com.joco.compose_showcaseview.ShowcaseDuration
 import com.joco.compose_showcaseview.ShowcasePosition
 import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
@@ -121,7 +121,7 @@ fun SequenceShowcaseScope.MainContent(
                     .sequenceShowcaseTarget(
                         index = 1,
                         highlight = ShowcaseHighlight.Rectangular(24.dp),
-                        duration = ShowcaseDuration(
+                        duration = AnimationDuration.create(
                             MainActivity.SHOWCASE_2_DURATION,
                             MainActivity.SHOWCASE_2_DURATION
                         ),
@@ -142,7 +142,7 @@ fun SequenceShowcaseScope.MainContent(
                             index = 2,
                             position = ShowcasePosition.Top,
                             highlight = ShowcaseHighlight.Circular(targetMargin = 12.dp),
-                            duration = ShowcaseDuration(
+                            duration = AnimationDuration.create(
                                 MainActivity.SHOWCASE_3_DURATION,
                                 MainActivity.SHOWCASE_3_DURATION
                             ),
