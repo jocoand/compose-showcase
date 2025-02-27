@@ -61,7 +61,7 @@ class SequenceShowcaseScope(
      * @param position The position of the dialog relative to the target element.
      * @param alignment The alignment of the dialog relative to the target element.
      * @param highlight The highlight around the target element.
-     * @param duration The duration of the fade enter and exit animation.
+     * @param animationDuration The duration of the fade enter and exit animation.
      * @param content The content of the dialog.
      */
     fun Modifier.sequenceShowcaseTarget(
@@ -69,7 +69,7 @@ class SequenceShowcaseScope(
         position: ShowcasePosition = ShowcasePosition.Default,
         alignment: ShowcaseAlignment = ShowcaseAlignment.Default,
         highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
-        duration: AnimationDuration = AnimationDuration.Default,
+        animationDuration: AnimationDuration = AnimationDuration.Default,
         content: @Composable () -> Unit,
     ): Modifier = onGloballyPositioned { coordinates ->
         state.targets[index] = SequenceShowcaseTarget(
@@ -78,7 +78,7 @@ class SequenceShowcaseScope(
             position = position,
             alignment = alignment,
             highlight = highlight,
-            duration = duration,
+            duration = animationDuration,
             content = content
         )
     }
