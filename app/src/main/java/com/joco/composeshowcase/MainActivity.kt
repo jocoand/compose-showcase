@@ -121,7 +121,7 @@ fun SequenceShowcaseScope.MainContent(
                     .sequenceShowcaseTarget(
                         index = 1,
                         highlight = ShowcaseHighlight.Rectangular(24.dp),
-                        duration = AnimationDuration.create(
+                        animationDuration = AnimationDuration.create(
                             MainActivity.SHOWCASE_2_DURATION,
                             MainActivity.SHOWCASE_2_DURATION
                         ),
@@ -142,7 +142,7 @@ fun SequenceShowcaseScope.MainContent(
                             index = 2,
                             position = ShowcasePosition.Top,
                             highlight = ShowcaseHighlight.Circular(targetMargin = 12.dp),
-                            duration = AnimationDuration.create(
+                            animationDuration = AnimationDuration.create(
                                 MainActivity.SHOWCASE_3_DURATION,
                                 MainActivity.SHOWCASE_3_DURATION
                             ),
