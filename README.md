@@ -17,7 +17,7 @@
 
 ## 🍁 Sequence Showcase
 <p>
-<img src="https://img.shields.io/badge/mavenCentral-1.1.1-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.2.0-blue.svg" alt="version">
 
 Creating a sequence of showcases in a specific order.
 
@@ -28,7 +28,7 @@ Creating a sequence of showcases in a specific order.
 ### Installation
 - Gradle
   ```
-  implementation("io.github.jocoand:showcase-sequence:1.1.1")
+  implementation("io.github.jocoand:showcase-sequence:1.2.0")
   ```
 
 ### Usage
@@ -172,6 +172,8 @@ Creating a sequence of showcases in a specific order.
       <td align="center">Circular</td>
     </tr>
   </table>
+
+-  `animationDuration`: duration of the enter and exit animation.
 
 ### Inspired by 💡 
 - https://github.com/canopas/compose-intro-showcase
