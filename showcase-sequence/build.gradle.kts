@@ -49,7 +49,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.material3)
 
-    api(libs.compose.showcaseview)
+    api(project(":showcaseview"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
