@@ -8,10 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.LayoutCoordinates
-import com.joco.compose_showcaseview.AnimationDuration
-import com.joco.compose_showcaseview.ShowcaseAlignment
-import com.joco.compose_showcaseview.ShowcasePosition
-import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
+import com.joco.showcaseview.AnimationDuration
+import com.joco.showcaseview.ShowcaseAlignment
+import com.joco.showcaseview.ShowcasePosition
+import com.joco.showcaseview.highlight.ShowcaseHighlight
 
 @Composable
 fun rememberSequenceShowcaseState(): SequenceShowcaseState {
