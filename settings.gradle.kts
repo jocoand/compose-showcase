@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Compose Showcase"
 include(":app")
 include(":showcase-sequence")
+include(":showcaseview")

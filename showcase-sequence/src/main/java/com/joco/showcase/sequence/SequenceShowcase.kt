@@ -6,12 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
-import com.joco.compose_showcaseview.AnimationDuration
-import com.joco.compose_showcaseview.ShowcaseAlignment
-import com.joco.compose_showcaseview.ShowcaseDisplayState
-import com.joco.compose_showcaseview.ShowcasePosition
-import com.joco.compose_showcaseview.ShowcaseView
-import com.joco.compose_showcaseview.highlight.ShowcaseHighlight
+import com.joco.showcaseview.AnimationDuration
+import com.joco.showcaseview.ShowcaseAlignment
+import com.joco.showcaseview.ShowcaseDisplayState
+import com.joco.showcaseview.ShowcasePosition
+import com.joco.showcaseview.ShowcaseView
+import com.joco.showcaseview.highlight.ShowcaseHighlight
 
 @Composable
 fun SequenceShowcase(

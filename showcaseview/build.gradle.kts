@@ -7,8 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.joco.showcase.sequence"
+    namespace = "com.joco.showcaseview"
     compileSdk = 34
+
+    version = findProperty("VERSION_NAME") as String
 
     defaultConfig {
         minSdk = 21
@@ -48,8 +50,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.material3)
-
-    api(project(":showcaseview"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
