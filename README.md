@@ -28,7 +28,7 @@ Creating a sequence of showcases in a specific order.
 ### Installation
 - Gradle
   ```
-  implementation("io.github.jocoand:showcase-sequence:1.2.0")
+  implementation("io.github.jocoand:showcase-sequence:1.2.1-rc01")
   ```
 
 ### Usage
