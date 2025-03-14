@@ -1,6 +1,7 @@
 [versions]
 agp = "8.3.1"
 composeShowcaseview = "1.4.1"
+foundation = "1.7.8"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -18,6 +19,7 @@ roborazzi = "1.8.0-alpha-5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 compose-showcaseview = { module = "io.github.jocoand:compose-showcaseview", version.ref = "composeShowcaseview" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
