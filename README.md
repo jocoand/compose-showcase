@@ -186,6 +186,7 @@ Creating a sequence of showcases in a specific order.
 
 In case you need more basic usage, you can you use [ShowcaseView](https://github.com/jocoand/compose-showcaseview/tree/main)
 
-### Contributing
+## Contributing
 Contribution are welcome! 
 Feel free to open an issue or a pull request, if you find any bugs or have any suggestions.
+If you're new to the project, we recommend starting with a [`good first issue`](https://github.com/jocoand/compose-showcase/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). that are tailored for first time contributors in the project.
