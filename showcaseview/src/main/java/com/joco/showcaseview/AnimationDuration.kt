@@ -17,6 +17,16 @@ class AnimationDuration private constructor(val enterMillis: Int, val exitMillis
         val Default = AnimationDuration(DEFAULT_MILLIS, DEFAULT_MILLIS)
 
         /**
+         * Creates a `AnimationDuration` with the default duration for both enter and exit animations.
+         */
+        val Fast = AnimationDuration(300, 300)
+
+        /**
+         * Creates a `AnimationDuration` with the default duration for both enter and exit animations.
+         */
+        val Slow = AnimationDuration(1000, 1000)
+
+        /**
          * Creates a `AnimationDuration` with the same duration for both enter and exit animations.
          *
          * @param durationMillis Animations duration in milliseconds.
