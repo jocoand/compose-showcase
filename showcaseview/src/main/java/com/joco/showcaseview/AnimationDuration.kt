@@ -6,7 +6,7 @@ package com.joco.showcaseview
  * @property enterMillis The duration of the enter animation in milliseconds.
  * @property exitMillis The duration of the exit animation in milliseconds.
  */
-class AnimationDuration private constructor(val enterMillis: Int, val exitMillis: Int) {
+data class AnimationDuration internal constructor(val enterMillis: Int, val exitMillis: Int) {
 
     companion object {
         private const val DEFAULT_MILLIS = 700
