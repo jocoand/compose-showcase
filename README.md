@@ -17,7 +17,7 @@
 
 ## 🍁 Sequence Showcase
 <p>
-<img src="https://img.shields.io/badge/mavenCentral-1.2.2-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.2.3-blue.svg" alt="version">
 
 Creating a sequence of showcases in a specific order.
 
@@ -28,7 +28,7 @@ Creating a sequence of showcases in a specific order.
 ### Installation
 - Gradle
   ```
-  implementation("io.github.jocoand:showcase-sequence:1.2.2")
+  implementation("io.github.jocoand:showcase-sequence:1.2.3")
   ```
 
 ### Usage
@@ -182,12 +182,12 @@ Creating a sequence of showcases in a specific order.
 - See [MainActivity](https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt)
 
 ## 🌀 ShowcaseView 
-<img src="https://img.shields.io/badge/mavenCentral-1.4.2-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.4.3-blue.svg" alt="version">
 
 In case you need more basic usage, you can you use [ShowcaseView](https://github.com/jocoand/compose-showcaseview/tree/main)
 
 ```
-implementation("io.github.jocoand:showcase-sequence:1.4.2")
+implementation("io.github.jocoand:showcase-sequence:1.4.3")
 ```
 
 ## Contributing
