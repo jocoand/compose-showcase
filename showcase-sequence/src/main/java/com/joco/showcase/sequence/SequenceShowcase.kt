@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.joco.showcaseview.AnimationDuration
 import com.joco.showcaseview.ShowcaseAlignment
@@ -41,8 +42,8 @@ fun SequenceShowcase(
                         }
                     }
                 }
-            ) {
-                target.content()
+            ) { targetRect ->
+                target.content(targetRect)
             }
         }
     }
@@ -70,7 +71,7 @@ class SequenceShowcaseScope(
         alignment: ShowcaseAlignment = ShowcaseAlignment.Default,
         highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
         animationDuration: AnimationDuration = AnimationDuration.Default,
-        content: @Composable () -> Unit,
+        content: @Composable (Rect) -> Unit,
     ): Modifier = onGloballyPositioned { coordinates ->
         state.targets[index] = SequenceShowcaseTarget(
             index = index,
