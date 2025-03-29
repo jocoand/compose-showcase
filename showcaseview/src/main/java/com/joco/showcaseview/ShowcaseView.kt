@@ -50,7 +50,7 @@ fun ShowcaseView(
     animationDuration: AnimationDuration = AnimationDuration.Default,
     onDisplayStateChanged: (ShowcaseDisplayState) -> Unit = {},
     highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
-    dialog: @Composable () -> Unit
+    dialog: @Composable (Rect) -> Unit
 ) {
     val transition =  remember { MutableTransitionState(false) }
     val highlightDrawer = highlight.create(targetCoordinates = targetCoordinates)
@@ -128,7 +128,7 @@ private fun ShowcaseDialog(
     position: ShowcasePosition,
     alignment: ShowcaseAlignment,
     highlightBounds: Rect,
-    content: @Composable () -> Unit
+    content: @Composable (Rect) -> Unit
 ) {
     var offsetX by remember { mutableFloatStateOf(0f) }
     var offsetY by remember { mutableFloatStateOf(0f) }
@@ -178,7 +178,7 @@ private fun ShowcaseDialog(
                 }
             }
     ) {
-        content()
+        content(highlightBounds)
     }
 }
 
