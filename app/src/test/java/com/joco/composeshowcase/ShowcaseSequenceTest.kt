@@ -80,7 +80,7 @@ class ShowcaseSequenceTest {
         capture()
 
         // 3rd showcase
-        buttonNice.performClick()
+        buttonAwesome.performClick()
         advanceTime(MainActivity.SHOWCASE_2_DURATION + MainActivity.SHOWCASE_3_DURATION.toLong())
         capture()
 
