@@ -34,6 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.joco.composeshowcase.dialog.MyTooltipDialog
+import com.joco.composeshowcase.dialog.SkeletonTooltipDialog
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
 import com.joco.showcase.sequence.SequenceShowcase
 import com.joco.showcase.sequence.SequenceShowcaseScope
@@ -126,7 +128,7 @@ fun SequenceShowcaseScope.MainContent(
                             MainActivity.SHOWCASE_2_DURATION
                         ),
                         content = {
-                            MyShowcaseDialog(
+                            MyShowcaseDialog2(
                                 text = "You can read cool articles here!",
                                 onClick = { sequenceShowcaseState.next() }
                             )
@@ -148,7 +150,8 @@ fun SequenceShowcaseScope.MainContent(
                             ),
                             alignment = ShowcaseAlignment.CenterHorizontal,
                             content = {
-                                MyShowcaseDialog(
+                                MyTooltipDialog(
+                                    targetRect = it,
                                     text = "Click here if you love the article!",
                                     onClick = { sequenceShowcaseState.next() }
                                 )
@@ -160,10 +163,13 @@ fun SequenceShowcaseScope.MainContent(
                     modifier = Modifier
                         .sequenceShowcaseTarget(
                             index = 3,
+                            position = ShowcasePosition.Top,
                             highlight = ShowcaseHighlight.Rectangular(0.dp),
                             alignment = ShowcaseAlignment.CenterHorizontal,
                             content = {
-                                MyShowcaseDialog2(
+                                SkeletonTooltipDialog(
+                                    targetRect = it,
+                                    pointerSize = 32.dp,
                                     text = "You also can share the article!",
                                     onClick = { sequenceShowcaseState.next() }
                                 )
