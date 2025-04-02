@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.LayoutCoordinates
 import com.joco.showcaseview.AnimationDuration
+import com.joco.showcaseview.BackgroundAlpha
 import com.joco.showcaseview.ShowcaseAlignment
 import com.joco.showcaseview.ShowcasePosition
 import com.joco.showcaseview.highlight.ShowcaseHighlight
@@ -85,5 +86,6 @@ data class SequenceShowcaseTarget(
     val alignment: ShowcaseAlignment,
     val highlight: ShowcaseHighlight,
     val duration: AnimationDuration,
+    val backgroundAlpha: BackgroundAlpha,
     val content: @Composable (Rect) -> Unit
 )
