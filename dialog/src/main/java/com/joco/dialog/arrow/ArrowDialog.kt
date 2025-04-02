@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
  * @param pointerSize The size of the pointer.
  * @param content The content to be displayed inside the dialog. A [Color] parameter
  * to allow the content to adapt to the pointer's color.
+ *
+ * Note currently support only vertical arrow.
  */
 @Composable
 fun ArrowDialog(
