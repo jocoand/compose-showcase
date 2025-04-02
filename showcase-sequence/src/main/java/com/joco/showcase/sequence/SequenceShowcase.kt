@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.joco.showcaseview.AnimationDuration
+import com.joco.showcaseview.BackgroundAlpha
 import com.joco.showcaseview.ShowcaseAlignment
 import com.joco.showcaseview.ShowcaseDisplayState
 import com.joco.showcaseview.ShowcasePosition
@@ -32,6 +33,7 @@ fun SequenceShowcase(
                 alignment = target.alignment,
                 highlight = target.highlight,
                 animationDuration = target.duration,
+                backgroundAlpha = target.backgroundAlpha,
                 onDisplayStateChanged = { displayState ->
                     when(displayState) {
                         ShowcaseDisplayState.Appeared -> {
@@ -63,6 +65,7 @@ class SequenceShowcaseScope(
      * @param alignment The alignment of the dialog relative to the target element.
      * @param highlight The highlight around the target element.
      * @param animationDuration The duration of the fade enter and exit animation.
+     * @param backgroundAlpha The alpha value of the background overlay.
      * @param content The content of the dialog.
      */
     fun Modifier.sequenceShowcaseTarget(
@@ -71,6 +74,7 @@ class SequenceShowcaseScope(
         alignment: ShowcaseAlignment = ShowcaseAlignment.Default,
         highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
         animationDuration: AnimationDuration = AnimationDuration.Default,
+        backgroundAlpha: BackgroundAlpha = BackgroundAlpha.Normal,
         content: @Composable (Rect) -> Unit,
     ): Modifier = onGloballyPositioned { coordinates ->
         state.targets[index] = SequenceShowcaseTarget(
@@ -80,6 +84,7 @@ class SequenceShowcaseScope(
             alignment = alignment,
             highlight = highlight,
             duration = animationDuration,
+            backgroundAlpha = backgroundAlpha,
             content = content
         )
     }

@@ -39,6 +39,7 @@ import com.joco.showcaseview.highlight.ShowcaseHighlight
  * @param animationDuration the duration of the fade in and fade out animation.
  * @param onDisplayStateChanged: callback function that is invoked when the display state of the Showcase changes.
  * @param highlight the highlight around the target element.
+ * @param backgroundAlpha the alpha value of the background overlay.
  * @param dialog the content of the dialog.
  */
 @Composable
@@ -50,6 +51,7 @@ fun ShowcaseView(
     animationDuration: AnimationDuration = AnimationDuration.Default,
     onDisplayStateChanged: (ShowcaseDisplayState) -> Unit = {},
     highlight: ShowcaseHighlight = ShowcaseHighlight.Rectangular(),
+    backgroundAlpha: BackgroundAlpha = BackgroundAlpha.Normal,
     dialog: @Composable (Rect) -> Unit
 ) {
     val transition =  remember { MutableTransitionState(false) }
@@ -63,7 +65,8 @@ fun ShowcaseView(
         Box {
             ShowcaseBackground(
                 coordinates = targetCoordinates,
-                drawHighlight = highlightDrawer.drawHighlight
+                drawHighlight = highlightDrawer.drawHighlight,
+                backgroundAlpha = backgroundAlpha
             )
             ShowcaseDialog(
                 targetRect = targetCoordinates.boundsInRoot(),
@@ -97,16 +100,17 @@ fun ShowcaseView(
 @Composable
 private fun ShowcaseBackground(
     coordinates: LayoutCoordinates,
+    backgroundAlpha: BackgroundAlpha,
     drawHighlight: DrawScope.(LayoutCoordinates) -> Unit
 ) {
     Canvas(
         modifier = Modifier
             .fillMaxSize()
-            .graphicsLayer(alpha = 0.6f)
+            .graphicsLayer(alpha = backgroundAlpha.value)
     ) {
         // Overlay
         drawRect(
-            Color.Black.copy(alpha = 0.6f),
+            Color.Black.copy(alpha = backgroundAlpha.value),
             size = Size(size.width, size.height)
         )
         drawHighlight(coordinates)
