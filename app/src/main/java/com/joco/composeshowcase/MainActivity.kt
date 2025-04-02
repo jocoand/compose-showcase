@@ -36,12 +36,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.joco.composeshowcase.dialog.MyArrowDialog
 import com.joco.composeshowcase.dialog.SkeletonArrowDialog
+import com.joco.composeshowcase.dialog.TransparentDialog
 import com.joco.composeshowcase.ui.theme.ComposeShowcaseTheme
 import com.joco.showcase.sequence.SequenceShowcase
 import com.joco.showcase.sequence.SequenceShowcaseScope
 import com.joco.showcase.sequence.SequenceShowcaseState
 import com.joco.showcase.sequence.rememberSequenceShowcaseState
 import com.joco.showcaseview.AnimationDuration
+import com.joco.showcaseview.BackgroundAlpha
 import com.joco.showcaseview.ShowcaseAlignment
 import com.joco.showcaseview.ShowcasePosition
 import com.joco.showcaseview.highlight.ShowcaseHighlight
@@ -90,6 +92,11 @@ fun SequenceShowcaseScope.MainContent(
     Surface(
         modifier = Modifier
             .fillMaxSize()
+            .then(if (sequenceShowcaseState.currentTargetIndex == 3) {
+                Modifier.clickable { sequenceShowcaseState.next() }
+            } else {
+                Modifier
+            })
             .padding(innerPadding),
         color = MaterialTheme.colorScheme.background
     ) {
@@ -128,7 +135,8 @@ fun SequenceShowcaseScope.MainContent(
                             MainActivity.SHOWCASE_2_DURATION
                         ),
                         content = {
-                            MyShowcaseDialog2(
+                            MyArrowDialog(
+                                targetRect = it,
                                 text = "You can read cool articles here!",
                                 onClick = { sequenceShowcaseState.next() }
                             )
@@ -150,8 +158,9 @@ fun SequenceShowcaseScope.MainContent(
                             ),
                             alignment = ShowcaseAlignment.CenterHorizontal,
                             content = {
-                                MyArrowDialog(
+                                SkeletonArrowDialog(
                                     targetRect = it,
+                                    pointerSize = 28.dp,
                                     text = "Click here if you love the article!",
                                     onClick = { sequenceShowcaseState.next() }
                                 )
@@ -163,15 +172,15 @@ fun SequenceShowcaseScope.MainContent(
                     modifier = Modifier
                         .sequenceShowcaseTarget(
                             index = 3,
-                            position = ShowcasePosition.Top,
+                            position = ShowcasePosition.Bottom,
                             highlight = ShowcaseHighlight.Rectangular(0.dp),
                             alignment = ShowcaseAlignment.CenterHorizontal,
+                            backgroundAlpha = BackgroundAlpha.Dark,
                             content = {
-                                SkeletonArrowDialog(
-                                    targetRect = it,
-                                    pointerSize = 32.dp,
+                                TransparentDialog(
+                                    title = "Share Article",
                                     text = "You also can share the article!",
-                                    onClick = { sequenceShowcaseState.next() }
+                                    alignment = Alignment.End
                                 )
                             }
                         )

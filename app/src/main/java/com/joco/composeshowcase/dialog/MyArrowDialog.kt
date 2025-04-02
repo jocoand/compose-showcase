@@ -16,15 +16,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joco.composeshowcase.R
 import com.joco.dialog.arrow.ArrowDialog
+import com.joco.dialog.arrow.ArrowDialogDefaults
 
 @Composable
-fun MyArrowDialog(targetRect: Rect, text: String, onClick: () -> Unit) {
+fun MyArrowDialog(
+    targetRect: Rect,
+    text: String,
+    pointerSize: Dp = ArrowDialogDefaults.pointerSize,
+    onClick: () -> Unit
+) {
     ArrowDialog(
         targetRect = targetRect,
         pointerColor = Color.White,
+        pointerSize = pointerSize,
         content = { color ->
             InnerDialog(text, color, onClick)
         }
