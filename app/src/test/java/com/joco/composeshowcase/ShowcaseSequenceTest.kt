@@ -80,17 +80,17 @@ class ShowcaseSequenceTest {
         capture()
 
         // 3rd showcase
-        buttonAwesome.performClick()
+        buttonNice.performClick()
         advanceTime(MainActivity.SHOWCASE_2_DURATION + MainActivity.SHOWCASE_3_DURATION.toLong())
         capture()
 
         // 4th showcase
-        buttonNice.performClick()
+        buttonAwesome.performClick()
         advanceTime(MainActivity.SHOWCASE_3_DURATION.toLong() + DEFAULT_MILLIS)
         capture()
 
         // Close
-        buttonAwesome.performClick()
+        composeRule.onRoot().performClick()
         advanceTime()
         capture()
     }
