@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.foundation)
 
     api(libs.compose.showcaseview)
+    api(libs.dialog)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
