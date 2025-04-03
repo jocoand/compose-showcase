@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(project(":showcase-sequence"))
-    implementation(project(":dialog"))
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
