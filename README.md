@@ -48,7 +48,7 @@ Creating a sequence of showcases in a specific order.
         }
     }
   ```
-  or you can use our [Predefined Dialog](https://github.com/jocoand/compose-showcase/edit/main/README.md#dialog)
+  or you can use our [Predefined Dialog](https://github.com/jocoand/compose-showcase?tab=readme-ov-file#-dialog)
 - #### Declare the `SequenceShowcase` & `sequenceShowcaseState`
 - ```
   val sequenceShowcaseState = rememberSequenceShowcaseState()
