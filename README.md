@@ -17,43 +17,38 @@
 
 ## 🍁 Sequence Showcase
 <p>
-<img src="https://img.shields.io/badge/mavenCentral-1.2.3-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.3.0-blue.svg" alt="version">
 
 Creating a sequence of showcases in a specific order.
 
 <img src="https://github.com/user-attachments/assets/c4826028-2699-4a70-ab83-edee811f3884" width="275" alt="preview">
+
+<img src="https://github.com/user-attachments/assets/f32269a3-eb95-4b41-8cdc-d497e82271e3" width="273" alt="preview2">
 
 </p>
 
 ### Installation
 - Gradle
   ```
-  implementation("io.github.jocoand:showcase-sequence:1.2.3")
+  implementation("io.github.jocoand:showcase-sequence:1.3.0")
   ```
 
 ### Usage
 - #### Create your Showcase dialog
+
 - ```
     @Composable
     fun MyShowcaseDialog(text: String, onClick: () -> Unit) {
-        Column(
-            modifier = Modifier
-                .background(Color.White, shape = RoundedCornerShape(12.dp))
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.End
-        ) {
+        Column {
             Text(text = text)
             Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                shape = RoundedCornerShape(8.dp),
-                onClick = onClick
-            ) {
+            Button(onClick = onClick) {
                 Text("Nice !")
             }
         }
     }
   ```
+  or you can use our [Predefined Dialog](https://github.com/jocoand/compose-showcase/edit/main/README.md#dialog)
 - #### Declare the `SequenceShowcase` & `sequenceShowcaseState`
 - ```
   val sequenceShowcaseState = rememberSequenceShowcaseState()
@@ -181,14 +176,37 @@ Creating a sequence of showcases in a specific order.
 ### Sample 🎨 
 - See [MainActivity](https://github.com/jocoand/compose-showcase/blob/main/app/src/main/java/com/joco/composeshowcase/MainActivity.kt)
 
+
 ## 🌀 ShowcaseView 
-<img src="https://img.shields.io/badge/mavenCentral-1.4.3-blue.svg" alt="version">
+<img src="https://img.shields.io/badge/mavenCentral-1.4.4-blue.svg" alt="version">
 
 In case you need more basic usage, you can you use [ShowcaseView](https://github.com/jocoand/compose-showcaseview/tree/main)
 
 ```
-implementation("io.github.jocoand:showcase-sequence:1.4.3")
+implementation("io.github.jocoand:showcase-sequence:1.4.4")
 ```
+
+## 🏮 Dialog
+
+### Arrow Dialog
+
+A predefined dialog with arrow shape pointer.
+
+<img width="280" alt="Screen Shot 2025-04-03 at 13 15 05" src="https://github.com/user-attachments/assets/8c46be99-dc26-4cef-b5a9-36071db4dce9" />
+
+### Usage
+```
+.sequenceShowcaseTarget(
+    ...
+    .content  = {
+        ArrowDialog(
+            targetRect = it,
+            content = { 
+                // Your dialog content
+            }
+        )
+    }
+  ```
 
 ## Contributing
 Contribution are welcome! 
