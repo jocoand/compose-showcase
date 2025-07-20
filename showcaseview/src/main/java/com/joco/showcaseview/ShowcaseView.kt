@@ -54,6 +54,9 @@ fun ShowcaseView(
     backgroundAlpha: BackgroundAlpha = BackgroundAlpha.Normal,
     dialog: @Composable (Rect) -> Unit
 ) {
+    // Prevent crash if coordinates are not attached
+    if (!targetCoordinates.isAttached) return
+
     val transition =  remember { MutableTransitionState(false) }
     val highlightDrawer = highlight.create(targetCoordinates = targetCoordinates)
 
