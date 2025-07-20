@@ -1,5 +1,6 @@
 package com.joco.showcaseview
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
@@ -55,7 +56,10 @@ fun ShowcaseView(
     dialog: @Composable (Rect) -> Unit
 ) {
     // Prevent crash if coordinates are not attached
-    if (!targetCoordinates.isAttached) return
+    if (!targetCoordinates.isAttached) {
+        Log.w("ShowcaseView", "Target coordinates are not attached, skipping showcase")
+        return
+    }
 
     val transition =  remember { MutableTransitionState(false) }
     val highlightDrawer = highlight.create(targetCoordinates = targetCoordinates)
