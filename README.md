@@ -2,7 +2,7 @@
     
   # Compose Showcase
 
-  <img src="https://img.shields.io/badge/platform-android-brightgreen.svg" alt="platform">
+  <img src="https://img.shields.io/badge/Compose-Multiplatform-3DDC84?logo=jetpackcompose&logoColor=white" alt="platform">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
   <img src="https://github.com/jocoand/compose-showcase/actions/workflows/verify-screenshot-test.yml/badge.svg?branch=main" alt="status">
 
@@ -104,6 +104,19 @@ Creating a sequence of showcases in a specific order.
                 }
             )
     )
+  ```
+
+
+- #### Use `LocalSequenceShowcaseState` to navigate using child composables inside `SequenceShowcaseScope`
+- ```
+    @Composable
+    SequenceShowcaseScope.MyChildView() {
+        // Inside a composable with SequenceShowcaseScope, you can access the current SequenceShowcaseState using LocalSequenceShowcaseState.current
+        val sequenceShowcaseState = LocalSequenceShowcaseState.current
+        Button(onClick = { sequenceShowcaseState.next() }) {
+            Text("Next")
+        }
+    }
   ```
 
 - You can also dismiss the the showcase using `dimiss()`

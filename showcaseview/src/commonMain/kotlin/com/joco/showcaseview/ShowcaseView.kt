@@ -1,34 +1,32 @@
 package com.joco.showcaseview
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
+import com.joco.showcaseview.highlight.HighlightProperties
 import com.joco.showcaseview.highlight.ShowcaseHighlight
+import kotlin.math.roundToInt
 
 /**
  * Displays a dialog with a background overlay.
@@ -57,7 +55,7 @@ fun ShowcaseView(
 ) {
     // Prevent crash if coordinates are not attached
     if (!targetCoordinates.isAttached) {
-        Log.w("ShowcaseView", "Target coordinates are not attached, skipping showcase")
+        println("ShowcaseView: Target coordinates are not attached, skipping showcase")
         return
     }
 
@@ -71,8 +69,7 @@ fun ShowcaseView(
     ) {
         Box {
             ShowcaseBackground(
-                coordinates = targetCoordinates,
-                drawHighlight = highlightDrawer.drawHighlight,
+                highlightProperties = highlightDrawer,
                 backgroundAlpha = backgroundAlpha
             )
             ShowcaseDialog(
@@ -99,29 +96,33 @@ fun ShowcaseView(
 }
 
 /**
- * Draws the background overlay and the highlight around the target element.
+ * Draws the background overlay and cuts out the highlight around the target element using an EvenOdd Path.
  *
- * @param coordinates the coordinates of the target element that the Showcase is highlighting.
- * @param drawHighlight draws the highlight around the target element.
+ * @param highlightProperties the properties of the highlight containing cutout geometry.
+ * @param backgroundAlpha the alpha value of the background overlay.
  */
 @Composable
 private fun ShowcaseBackground(
-    coordinates: LayoutCoordinates,
-    backgroundAlpha: BackgroundAlpha,
-    drawHighlight: DrawScope.(LayoutCoordinates) -> Unit
+    highlightProperties: HighlightProperties,
+    backgroundAlpha: BackgroundAlpha
 ) {
-    Canvas(
+    Spacer(
         modifier = Modifier
             .fillMaxSize()
-            .graphicsLayer(alpha = backgroundAlpha.value)
-    ) {
-        // Overlay
-        drawRect(
-            Color.Black.copy(alpha = backgroundAlpha.value),
-            size = Size(size.width, size.height)
-        )
-        drawHighlight(coordinates)
-    }
+            .drawWithCache {
+                val path = Path().apply {
+                    fillType = PathFillType.EvenOdd
+                    addRect(Rect(Offset.Zero, size))
+                    highlightProperties.addCutoutToPath(this)
+                }
+                onDrawBehind {
+                    drawPath(
+                        path = path,
+                        color = Color.Black.copy(alpha = backgroundAlpha.value)
+                    )
+                }
+            }
+    )
 }
 
 /**
@@ -141,34 +142,31 @@ private fun ShowcaseDialog(
     highlightBounds: Rect,
     content: @Composable (Rect) -> Unit
 ) {
-    var offsetX by remember { mutableFloatStateOf(0f) }
-    var offsetY by remember { mutableFloatStateOf(0f) }
-    val configuration = LocalConfiguration.current
+    val windowInfo = LocalWindowInfo.current
     val density = LocalDensity.current
 
-    val screenHeight = with(density) {
-        configuration.screenHeightDp.dp.toPx()
-    }
-    val screenWidth = with(density) {
-        configuration.screenWidthDp.dp.toPx()
-    }
+    val screenHeight = windowInfo.containerSize.height.toFloat()
+    val screenWidth = windowInfo.containerSize.width.toFloat()
 
     val verticalSpacerPx = with(density) { 16.dp.toPx() }
 
     Box(
         modifier = Modifier
-            .offset(x = offsetX.toDp(), y = offsetY.toDp())
-            .onGloballyPositioned {
-                val dialogHeight = it.size.height
-                val dialogWidth = it.size.width
+            .fillMaxSize()
+            .layout { measurable, constraints ->
+                val placeable = measurable.measure(
+                    constraints.copy(minWidth = 0, minHeight = 0)
+                )
+                val dialogHeight = placeable.height
+                val dialogWidth = placeable.width
                 val highlightCenterX = highlightBounds.center.x
 
-                offsetX = when (alignment) {
+                val offsetX = when (alignment) {
                     ShowcaseAlignment.Start -> highlightBounds.left
                     ShowcaseAlignment.End -> highlightBounds.right - dialogWidth
-                    ShowcaseAlignment.CenterHorizontal -> (highlightCenterX - dialogWidth / 2)
+                    ShowcaseAlignment.CenterHorizontal -> (highlightCenterX - dialogWidth / 2f)
                     ShowcaseAlignment.Default -> {
-                        if (highlightCenterX > screenWidth / 2) {
+                        if (highlightCenterX > screenWidth / 2f) {
                             highlightBounds.right - dialogWidth
                         } else {
                             highlightBounds.left
@@ -176,24 +174,26 @@ private fun ShowcaseDialog(
                     }
                 }
 
-                offsetY = when (position) {
+                val offsetY = when (position) {
                     ShowcasePosition.Top -> highlightBounds.top - verticalSpacerPx - dialogHeight
                     ShowcasePosition.Bottom -> highlightBounds.bottom + verticalSpacerPx
                     ShowcasePosition.Default -> {
-                        if (targetRect.center.y > screenHeight / 2 + verticalSpacerPx) {
+                        if (targetRect.center.y > screenHeight / 2f + verticalSpacerPx) {
                             highlightBounds.top - verticalSpacerPx - dialogHeight
                         } else {
                             highlightBounds.bottom + verticalSpacerPx
                         }
                     }
                 }
+
+                val clampedX = offsetX.coerceIn(0f, (screenWidth - dialogWidth).coerceAtLeast(0f))
+                val clampedY = offsetY.coerceIn(0f, (screenHeight - dialogHeight).coerceAtLeast(0f))
+
+                layout(constraints.maxWidth, constraints.maxHeight) {
+                    placeable.place(clampedX.roundToInt(), clampedY.roundToInt())
+                }
             }
     ) {
         content(highlightBounds)
     }
-}
-
-@Composable
-fun Float.toDp() = with(LocalDensity.current) {
-    toDp()
 }

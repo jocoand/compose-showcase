@@ -1,5 +1,7 @@
 package com.joco.showcaseview
 
+import kotlin.jvm.JvmInline
+
 /**
  * Represent the alpha (transparency) level of a background.
  *

@@ -2,13 +2,13 @@ package com.joco.showcaseview.highlight
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -31,13 +31,23 @@ sealed interface ShowcaseHighlight {
         override fun create(
             targetCoordinates: LayoutCoordinates
         ): HighlightProperties {
+            val cornerRadiusPx = with(LocalDensity.current) { cornerRadius.toPx() }
             val highlightBounds = createHighlightBounds(
                 targetCoordinates.boundsInRoot(),
                 with(LocalDensity.current) { 8.dp.toPx() }
             )
             return HighlightProperties(
-                drawHighlight = { rectangularHighlight(cornerRadius.toPx(), highlightBounds) },
-                highlightBounds = highlightBounds
+                drawHighlight = { rectangularHighlight(cornerRadiusPx, highlightBounds) },
+                highlightBounds = highlightBounds,
+                addCutoutToPath = { path ->
+                    path.addRoundRect(
+                        RoundRect(
+                            rect = highlightBounds,
+                            radiusX = cornerRadiusPx,
+                            radiusY = cornerRadiusPx
+                        )
+                    )
+                }
             )
         }
 
@@ -81,12 +91,16 @@ sealed interface ShowcaseHighlight {
         @Composable
         override fun create(targetCoordinates: LayoutCoordinates): HighlightProperties {
             val targetMargin = with(LocalDensity.current) { targetMargin.toPx() }
+            val highlightBounds = createHighlightBounds(
+                targetCoordinates.boundsInRoot(),
+                targetMargin = targetMargin
+            )
             return HighlightProperties(
                 drawHighlight = { circularHighlight(it, targetMargin) },
-                highlightBounds = createHighlightBounds(
-                    targetCoordinates.boundsInRoot(),
-                    targetMargin = targetMargin
-                )
+                highlightBounds = highlightBounds,
+                addCutoutToPath = { path ->
+                    path.addOval(highlightBounds)
+                }
             )
         }
 
@@ -101,9 +115,7 @@ sealed interface ShowcaseHighlight {
             targetMargin: Float
         ) {
             val targetRect = coordinates.boundsInRoot()
-            val xOffset = targetRect.topLeft.x
-            val yOffset = targetRect.topLeft.y
-            val rectSize = coordinates.boundsInParent().size
+            val rectSize = targetRect.size
             val radius = if (rectSize.width > rectSize.height) {
                 rectSize.width / 2
             } else {
@@ -112,7 +124,7 @@ sealed interface ShowcaseHighlight {
             drawCircle(
                 color = Color.White,
                 radius = radius + targetMargin,
-                center = Offset(xOffset + rectSize.width / 2, yOffset + rectSize.height / 2),
+                center = targetRect.center,
                 blendMode = BlendMode.Clear
             )
         }

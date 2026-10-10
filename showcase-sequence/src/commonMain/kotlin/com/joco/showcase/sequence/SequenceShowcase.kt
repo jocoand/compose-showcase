@@ -3,7 +3,9 @@ package com.joco.showcase.sequence
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -15,6 +17,11 @@ import com.joco.showcaseview.ShowcasePosition
 import com.joco.showcaseview.ShowcaseView
 import com.joco.showcaseview.highlight.ShowcaseHighlight
 
+/**
+ * CompositionLocal containing the current [SequenceShowcaseState], or null if not within a [SequenceShowcase].
+ */
+val LocalSequenceShowcaseState = staticCompositionLocalOf<SequenceShowcaseState?> { null }
+
 @Composable
 fun SequenceShowcase(
     state: SequenceShowcaseState = rememberSequenceShowcaseState(),
@@ -22,30 +29,32 @@ fun SequenceShowcase(
 ) {
     val scope = remember(state) { SequenceShowcaseScope(state) }
 
-    Box(modifier = Modifier.fillMaxWidth()) {
-        scope.content()
+    CompositionLocalProvider(LocalSequenceShowcaseState provides state) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            scope.content()
 
-        state.currentTarget?.let { target ->
-            ShowcaseView(
-                visible = state.showCaseVisible,
-                targetCoordinates = target.coordinates,
-                position = target.position,
-                alignment = target.alignment,
-                highlight = target.highlight,
-                animationDuration = target.duration,
-                backgroundAlpha = target.backgroundAlpha,
-                onDisplayStateChanged = { displayState ->
-                    when(displayState) {
-                        ShowcaseDisplayState.Appeared -> {
-                            state.onShowcaseViewAppear()
-                        }
-                        ShowcaseDisplayState.Disappeared -> {
-                            state.onShowcaseViewDisappear()
+            state.currentTarget?.let { target ->
+                ShowcaseView(
+                    visible = state.showCaseVisible,
+                    targetCoordinates = target.coordinates,
+                    position = target.position,
+                    alignment = target.alignment,
+                    highlight = target.highlight,
+                    animationDuration = target.duration,
+                    backgroundAlpha = target.backgroundAlpha,
+                    onDisplayStateChanged = { displayState ->
+                        when(displayState) {
+                            ShowcaseDisplayState.Appeared -> {
+                                state.onShowcaseViewAppear()
+                            }
+                            ShowcaseDisplayState.Disappeared -> {
+                                state.onShowcaseViewDisappear()
+                            }
                         }
                     }
+                ) { targetRect ->
+                    target.content(targetRect)
                 }
-            ) { targetRect ->
-                target.content(targetRect)
             }
         }
     }
